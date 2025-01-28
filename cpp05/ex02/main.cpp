@@ -1,7 +1,10 @@
 #include "Utils.hpp"
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+// #include "RobotomyRequestForm.hpp"
+// #include "PresidentialPardonForm.hpp"
 
 int main(void)
 {
@@ -9,11 +12,11 @@ int main(void)
 
 	Bureaucrat pdg("PDG", 1);
 	Bureaucrat cdi("Cdi", 42);
-	Bureaucrat stage("Stagiaire", 150);
+	Bureaucrat stage("Stagiaire", 140);
 
-	Form form1("Formulaire 1", 1, 1);
-	Form form2("Formulaire 2", 42, 42);
-	Form form3("Formulaire 3", 150, 150);
+	ShrubberyCreationForm form1("Cible 1");
+	// RobotomyRequestForm form2("Cible 2");
+	// PresidentialPardonForm form3("Cible 3");
 
 	std::cout << pdg << std::endl;
 	std::cout << cdi << std::endl;
@@ -21,33 +24,21 @@ int main(void)
 
 	std::cout << std::endl;
 
-	std::cout << form1 << std::endl;
-	std::cout << form2 << std::endl;
-	std::cout << form3 << std::endl;
-
-	std::cout << std::endl;
-
-	// excetpion form
+	// Test ShrubberyCreationForm
 	try {
-		Form form("test1", 0, 42);
+		pdg.executeForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
 	try {
-		Form form("test2", 151, 42);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-		try {
-		Form form("test3", 42, 0);
+		cdi.executeForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
 	try {
-		Form form("test4", 42, 151);
+		stage.executeForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
@@ -55,7 +46,6 @@ int main(void)
 
 	std::cout << std::endl;
 
-	// signform
 	try {
 		pdg.signForm(form1);
 	}
@@ -63,51 +53,34 @@ int main(void)
 		std::cerr << e.what() << std::endl;
 	}
 	try {
-		pdg.signForm(form2);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-		try {
-		pdg.signForm(form3);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-
-	try {
 		cdi.signForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
 	try {
-		cdi.signForm(form2);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-		try {
-		cdi.signForm(form3);
-	}
-	catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-
-	try {
 		stage.signForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
+
+	std::cout << std::endl;
+
 	try {
-		stage.signForm(form2);
+		pdg.executeForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}
 	try {
-		stage.signForm(form3);
+		cdi.executeForm(form1);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.executeForm(form1);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
