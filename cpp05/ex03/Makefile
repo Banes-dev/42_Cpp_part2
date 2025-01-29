@@ -3,8 +3,8 @@ COMP = c++
 CFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 # Normal
-NAME = OtherForm
-FUNC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+NAME = CreateForm
+FUNC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJS = $(FUNC:.cpp=.o)
 
 

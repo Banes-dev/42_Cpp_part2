@@ -3,8 +3,8 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-// #include "RobotomyRequestForm.hpp"
-// #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main(void)
 {
@@ -15,8 +15,8 @@ int main(void)
 	Bureaucrat stage("Stagiaire", 140);
 
 	ShrubberyCreationForm form1("Cible 1");
-	// RobotomyRequestForm form2("Cible 2");
-	// PresidentialPardonForm form3("Cible 3");
+	RobotomyRequestForm form2("Cible 2");
+	PresidentialPardonForm form3("Cible 3");
 
 	std::cout << pdg << std::endl;
 	std::cout << cdi << std::endl;
@@ -81,6 +81,136 @@ int main(void)
 	}
 	try {
 		stage.executeForm(form1);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "-------------------------------------------------------------------------------" << std::endl << std::endl;
+
+
+	// Test RobotomyRequestForm
+	try {
+		pdg.executeForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		cdi.executeForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.executeForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	try {
+		pdg.signForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		cdi.signForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.signForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	try {
+		pdg.executeForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		cdi.executeForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.executeForm(form2);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "-------------------------------------------------------------------------------" << std::endl << std::endl;
+
+
+	// Test PresidentialPardonForm
+	try {
+		pdg.executeForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		cdi.executeForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.executeForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	try {
+		pdg.signForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		cdi.signForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.signForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	try {
+		pdg.executeForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		cdi.executeForm(form3);
+	}
+	catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
+	try {
+		stage.executeForm(form3);
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
