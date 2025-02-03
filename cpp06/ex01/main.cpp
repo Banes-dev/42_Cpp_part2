@@ -1,15 +1,33 @@
 #include "Utils.hpp"
 
-#include "ScalarConverter.hpp"
+#include "Serializer.hpp"
+#include "Data.hpp"
 
-int main(int argc, char **argv)
+int main(void)
 {
-	// if (argc != 2 && argv[1][0] != '\0')
-	if (argc != 2)
-	{
-		std::cout << Deny << Red << " Error wrong args\n" << Yellow << "Try : ./Convert [nb_to_convert]" << Reset_Color << std::endl;
-		return (1);
-	}
-	ScalarConverter::convert(argv[1]);
+	Data *data = new Data(42);
+	uintptr_t serialized_data = Serializer::serialize(data);
+	Data *deserialized_data = Serializer::deserialize(serialized_data);
+
+	std::cout << std::endl;
+
+	std::cout << Cyan << "Data : " << Yellow << data->getValue() << Reset_Color << std::endl;
+	std::cout << Cyan << "Serialized Data : " << Yellow << serialized_data << Reset_Color << std::endl;
+	std::cout << Cyan << "Deserialized Data : " << Yellow << deserialized_data->getValue() << Reset_Color << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << Cyan << "Address of data: " << Yellow << data << Reset_Color << std::endl;
+	std::cout << Cyan << "Address of serialized_data: " << Yellow << &serialized_data << Reset_Color << std::endl;
+	std::cout << Cyan << "Address of deserialized_data: " <<  Yellow <<deserialized_data << Reset_Color << std::endl;
+
+	std::cout << std::endl;
+
+	deserialized_data->setValue(21);
+	std::cout << Cyan << "Deserialized Data : " << Yellow << deserialized_data->getValue() << Reset_Color << std::endl;
+	std::cout << Cyan << "Data : " << Yellow << data->getValue() << Reset_Color << std::endl;
+
+	std::cout << std::endl;
+
 	return (0);
 }

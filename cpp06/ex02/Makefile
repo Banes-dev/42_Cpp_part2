@@ -4,7 +4,7 @@ CFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 # Normal
 NAME = ex01
-FUNC = main.cpp Serializer.cpp Data.cpp
+FUNC = main.cpp Base.cpp
 OBJS = $(FUNC:.cpp=.o)
 
 
