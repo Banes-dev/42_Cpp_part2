@@ -3,7 +3,7 @@ COMP = c++
 CFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 # Normal
-NAME = ex01
+NAME = ex02
 FUNC = main.cpp Base.cpp
 OBJS = $(FUNC:.cpp=.o)
 
