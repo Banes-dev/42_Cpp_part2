@@ -4,7 +4,8 @@
 
 #include "Utils.hpp"
 
-class Data {
+class Data
+{
     private:
 		int _value;
 	public:

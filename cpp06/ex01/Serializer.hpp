@@ -6,7 +6,8 @@
 #include "Utils.hpp"
 #include "Data.hpp"
 
-class Serializer {
+class Serializer
+{
     private:
 		Serializer(void);
 		Serializer(const Serializer &copy);

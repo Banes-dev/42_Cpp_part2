@@ -2,8 +2,6 @@
 
 #include "Utils.hpp"
 
-class Base
+class B : public Base
 {
-	public:
-		virtual ~Base();
 };

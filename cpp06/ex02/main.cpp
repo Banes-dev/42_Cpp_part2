@@ -1,32 +1,86 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 #include "Utils.hpp"
 
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
+// Other function
+Base *generate(void)
+{
+	std::srand(std::time(0) + std::rand());
+	int random = std::rand() % 3;
+
+	// std::cout << random << std::endl;
+	if (random == 0)
+	{
+		return (new A());
+	}
+	else if (random == 1)
+	{
+		return (new B());
+	}
+	else if (random == 2)
+	{
+		return (new C());
+	}
+	return (NULL);
+}
+
+void identify(Base *p)
+{
+	if (dynamic_cast<A *>(p))
+		std::cout << "A";
+	else if (dynamic_cast<B *>(p))
+		std::cout << "B";
+	else if (dynamic_cast<C *>(p))
+		std::cout << "C";
+}
+
+void identify(Base &p)
+{
+	try {
+		A &a = dynamic_cast<A &>(p);
+		(void)a;
+		std::cout << "A";
+	}
+	catch (std::exception &e) {
+	}
+	try {
+		B &b = dynamic_cast<B &>(p);
+		(void)b;
+		std::cout << "B";
+	}
+	catch (std::exception &e) {
+	}
+	try {
+		C &c = dynamic_cast<C &>(p);
+		(void)c;
+		std::cout << "C";
+	}
+	catch (std::exception &e) {
+	}
+}
+
+// Main
 int main(void)
 {
-	// Data *data = new Data(42);
-	// uintptr_t serialized_data = Serializer::serialize(data);
-	// Data *deserialized_data = Serializer::deserialize(serialized_data);
+	Base *base = generate();
 
-	// std::cout << std::endl;
+	// Pointer
+	std::cout << Cyan << "Pointer : " << Yellow;
+	identify(base);
+	std::cout << Reset_Color << std::endl;
 
-	// std::cout << Cyan << "Data : " << Yellow << data->getValue() << Reset_Color << std::endl;
-	// std::cout << Cyan << "Serialized Data : " << Yellow << serialized_data << Reset_Color << std::endl;
-	// std::cout << Cyan << "Deserialized Data : " << Yellow << deserialized_data->getValue() << Reset_Color << std::endl;
+	// Reference
+	std::cout << Cyan << "Reference : " << Yellow;
+	identify(*base);
+	std::cout << Reset_Color << std::endl;
 
-	// std::cout << std::endl;
-
-	// std::cout << Cyan << "Address of data: " << Yellow << data << Reset_Color << std::endl;
-	// std::cout << Cyan << "Address of serialized_data: " << Yellow << &serialized_data << Reset_Color << std::endl;
-	// std::cout << Cyan << "Address of deserialized_data: " <<  Yellow <<deserialized_data << Reset_Color << std::endl;
-
-	// std::cout << std::endl;
-
-	// deserialized_data->setValue(21);
-	// std::cout << Cyan << "Deserialized Data : " << Yellow << deserialized_data->getValue() << Reset_Color << std::endl;
-	// std::cout << Cyan << "Data : " << Yellow << data->getValue() << Reset_Color << std::endl;
-
-	// std::cout << std::endl;
-
+	delete base;
 	return (0);
 }

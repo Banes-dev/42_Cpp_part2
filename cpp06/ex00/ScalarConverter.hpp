@@ -10,7 +10,8 @@
 
 #include "Utils.hpp"
 
-class ScalarConverter {
+class ScalarConverter
+{
     private:
 		ScalarConverter(void);
 		ScalarConverter(const ScalarConverter &copy);
