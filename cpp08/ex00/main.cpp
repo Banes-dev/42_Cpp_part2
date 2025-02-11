@@ -4,7 +4,7 @@
 
 int main(void)
 {
-	std::vector<size_t> vector;
+	std::vector<int> vector;
 	vector.push_back(1);
     vector.push_back(2);
     vector.push_back(3);
@@ -13,8 +13,8 @@ int main(void)
 
 	// 1
     try {
-        std::vector<size_t>::iterator it = easyfind(vector, 1);
-        std::cout << Cyan << "Value found at index " << Yellow << it - vector.begin() << Reset_Color << std::endl;
+        std::vector<int>::iterator it = easyfind(vector, 1);
+        std::cout << Cyan << "Value " << Yellow  << *it << Cyan << " found at index " << Yellow << std::distance(vector.begin(), it) << Reset_Color << std::endl;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
@@ -22,8 +22,8 @@ int main(void)
 
     // 42
     try {
-        std::vector<size_t>::iterator it = easyfind(vector, 42);
-        std::cout << Cyan << "Value found at index " << Yellow << it - vector.begin() << Reset_Color << std::endl;
+        std::vector<int>::iterator it = easyfind(vector, 42);
+        std::cout << Cyan << "Value " << Yellow  << *it << Cyan << " found at index " << Yellow << std::distance(vector.begin(), it) << Reset_Color << std::endl;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
@@ -31,8 +31,8 @@ int main(void)
 
     // 1000
     try {
-        std::vector<size_t>::iterator it = easyfind(vector, 1000);
-        std::cout << Cyan << "Value found at index " << Yellow << it - vector.begin() << Reset_Color << std::endl;
+        std::vector<int>::iterator it = easyfind(vector, 1000);
+        std::cout << Cyan << "Value " << Yellow  << *it << Cyan << " found at index " << Yellow << std::distance(vector.begin(), it) << Reset_Color << std::endl;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;

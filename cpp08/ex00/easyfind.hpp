@@ -2,6 +2,8 @@
 
 #include <iostream>  	// base
 #include <vector> 		// vector
+#include <deque> 		// deque
+#include <list> 		// list
 #include <algorithm> 	// algo
 
 #include "Utils.hpp"
@@ -15,7 +17,7 @@ class NotFoundException : public std::exception {
 };
 
 template <typename T>
-typename T::iterator easyfind(T &list, size_t nb)
+typename T::iterator easyfind(T &list, int nb)
 {
 	typename T::iterator result;
 
