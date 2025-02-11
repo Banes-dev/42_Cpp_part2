@@ -23,5 +23,5 @@ int main(void)
 	iter(array2, 6, printChar);
 	std::cout << std::endl;
 
-	return 0;
+	return (0);
 }
