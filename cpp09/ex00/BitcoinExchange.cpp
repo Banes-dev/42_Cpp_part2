@@ -1,29 +1,35 @@
-#pragma once
-
-#include <iostream>  	// base
-#include <vector> 		// vector
-#include <deque> 		// deque
-#include <list> 		// list
-#include <algorithm> 	// algo
-
-#include "Utils.hpp"
+#include "BitcoinExchange.hpp"
 
 
-class NotFoundException : public std::exception {
-	public:
-		const char* what() const throw() {
-			return ("\033[0;31mValue not found in container\033[0m");
-		}
-};
-
-template <typename T>
-typename T::iterator easyfind(T &list, int nb)
+// Constructor & Destructor
+BitcoinExchange::BitcoinExchange(void)
 {
-	typename T::iterator result;
+	// open data.csv puis definir les valeurs du fichier dans le std::map _list
+}
 
-	result = std::find(list.begin(), list.end(), nb);
-	if (result != list.end())
-		return (result);
-	else
-		throw (NotFoundException());
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
+{
+	*this = copy;
+}
+
+BitcoinExchange::BitcoinExchange &operator=(const BitcoinExchange &copy)
+{
+	if (this != &copy)
+	{
+		this->_db = copy._db;
+	}
+	return (*this);
+}
+
+~BitcoinExchange::BitcoinExchange(void)
+{
+}
+
+
+// Other function
+void BitcoinExchange::addDataForBitcoin(const std::string *recup_input_file)
+{
+    // open le argv, gestion erreur
+    // parser le fichier passer en argument pour qu'il soit au format : date | valeur (date = YYYY-MM-DD, valeur = 0 - 1000 en float/size_t)
+	// si tout est bon on renvoie la multiplication de la valeur du bitcoin par la valeur de l'input
 }

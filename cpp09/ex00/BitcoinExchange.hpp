@@ -1,29 +1,30 @@
 #pragma once
 
 #include <iostream>  	// base
-#include <vector> 		// vector
-#include <deque> 		// deque
-#include <list> 		// list
+#include <map> 			// vector
 #include <algorithm> 	// algo
 
 #include "Utils.hpp"
 
 
-class NotFoundException : public std::exception {
-	public:
-		const char* what() const throw() {
-			return ("\033[0;31mValue not found in container\033[0m");
-		}
-};
-
-template <typename T>
-typename T::iterator easyfind(T &list, int nb)
+class BitcoinExchange
 {
-	typename T::iterator result;
+	private:
+		std::map<std::string, float> _db;
+	public:
+		BitcoinExchange(void);
+		BitcoinExchange(const BitcoinExchange &copy);
+		BitcoinExchange &operator=(const BitcoinExchange &copy);
+		~BitcoinExchange(void);
 
-	result = std::find(list.begin(), list.end(), nb);
-	if (result != list.end())
-		return (result);
-	else
-		throw (NotFoundException());
-}
+		// Other function
+		void addDataForBitcoin(const std::string *recup_input_file);
+
+		// Exceptions
+		class NotFoundException : public std::exception {
+			public:
+				virtual const char *what() const throw() {
+					return ("\033[0;31mValue not found in container\033[0m");
+				}
+		};
+};
