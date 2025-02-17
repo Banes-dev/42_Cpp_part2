@@ -7,7 +7,7 @@ int main(int argc, char**argv)
     // check args
     if (argc != 2)
     {
-        std::cout << Deny << Red << " Error wrong args\n" << Yellow << "Try : ./btc [input_file.txt]" << Reset_Color << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         return (1);
     }
 
