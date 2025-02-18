@@ -3,8 +3,8 @@ COMP = c++
 CFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 # Normal
-NAME = Span
-FUNC = main.cpp Span.cpp
+NAME = RPN
+FUNC = main.cpp RPN.cpp
 OBJS = $(FUNC:.cpp=.o)
 
 
