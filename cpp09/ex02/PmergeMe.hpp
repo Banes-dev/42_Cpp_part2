@@ -20,8 +20,8 @@ class PmergeMe
 		~PmergeMe();
 
 		// Other function
-		static std::vector<size_t> ConvertVector(char **args);
-		static std::deque<size_t> ConvertDeque(char **args);
+		static std::vector<size_t> ConvertVector(char **argv);
+		static std::deque<size_t> ConvertDeque(char **argv);
 		
 		static const std::vector<size_t> VectorTime(std::vector<size_t> list, double &time);
 		static const std::deque<size_t> DequeTime(std::deque<size_t> list, double &time);
@@ -37,10 +37,10 @@ class PmergeMe
 		static bool DequeIsSorted(std::deque<size_t> &list);
 
 		// Exceptions
-		class StackEmptyException : public std::exception {
+		class InvalidArgsException : public std::exception {
 			public:
 				virtual const char *what() const throw() {
-					return ("\033[0;31mNot enought numbers\033[0m");
+					return ("\033[0;31mInvalid argument\033[0m");
 				}
 		};
 };
