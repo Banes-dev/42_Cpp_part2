@@ -94,62 +94,6 @@ void PmergeMe::PrintDeque(const std::deque<size_t> &list)
 }
 
 // Utils function
-void Merge(std::vector<size_t>& arr, size_t left, size_t mid, size_t right)
-{
-    size_t i = left, j = mid + 1;
-    std::vector<size_t> temp;
-
-    while (i <= mid && j <= right)
-	{
-        if (arr[i] <= arr[j])
-            temp.push_back(arr[i++]);
-        else
-            temp.push_back(arr[j++]);
-    }
-
-    while (i <= mid) temp.push_back(arr[i++]);
-    while (j <= right) temp.push_back(arr[j++]);
-
-    for (size_t k = 0; k < temp.size(); k++)
-        arr[left + k] = temp[k];
-}
-
-void MergeSort(std::vector<size_t>& arr, size_t left, size_t right)
-{
-    if (left < right)
-	{
-        size_t mid = left + (right - left) / 2;
-        MergeSort(arr, left, mid);
-        MergeSort(arr, mid + 1, right);
-        Merge(arr, left, mid, right);
-    }
-}
-std::vector<size_t> GenerateInsertionSequence(size_t n)
-{
-    std::vector<size_t> sequence;
-    if (n == 0)
-		return (sequence);
-
-    size_t a = 1, b = 1;
-    while (b < n)
-	{
-        sequence.push_back(b - 1);
-        size_t temp = a + b;
-        a = b;
-        b = temp;
-    }
-
-    // Ajout des indices manquants
-    for (size_t i = 0; i < n; i++)
-	{
-        if (std::find(sequence.begin(), sequence.end(), i) == sequence.end())
-            sequence.push_back(i);
-    }
-    
-    return (sequence);
-}
-
-
 /////////////////////////// Vector ///////////////////////////
 // Générer la suite de Jacobsthal jusqu'à une limite donnée
 std::vector<size_t> VectorGenerateJacobsthalSequence(int n)
