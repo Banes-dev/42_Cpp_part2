@@ -149,62 +149,169 @@ std::vector<size_t> GenerateInsertionSequence(size_t n)
     return (sequence);
 }
 
+
+/////////////////////////// Vector ///////////////////////////
+// Générer la suite de Jacobsthal jusqu'à une limite donnée
+std::vector<size_t> VectorGenerateJacobsthalSequence(int n)
+{
+    std::vector<size_t> jacobsthal;
+    jacobsthal.push_back(0);
+    jacobsthal.push_back(1);
+
+    while ((int)jacobsthal.size() < n)
+	{
+        int next = jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2];
+        jacobsthal.push_back(next);
+    }
+    return (jacobsthal);
+}
+// Tri par insertion
+void VectorInsertionSort(std::vector<size_t> &arr)
+{
+    for (size_t i = 1; i < arr.size(); i++)
+	{
+        size_t key = arr[i];
+        size_t j = i;
+        
+        // Décaler les éléments plus grands vers la droite
+        while (j > 0 && arr[j - 1] > key)
+		{
+            arr[j] = arr[j - 1];
+            j--;
+        }
+
+        // Insérer l'élément à la bonne place
+        arr[j] = key;
+    }
+}
+// Recherche binaire
+void VectorBinaryInsert(std::vector<size_t> &sortedList, int element)
+{
+    std::vector<size_t>::iterator it = std::lower_bound(sortedList.begin(), sortedList.end(), element);
+    sortedList.insert(it, element);
+}
 std::vector<size_t> PmergeMe::VectorSort(std::vector<size_t> list)
 {
 	if (VectorIsSorted(list) == true)
 		return (list);
 
-    std::vector<size_t> sorted;
-    std::vector<size_t> pending;
-
-    // Étape 1 : Division en paires et tri manuel des paires
-    size_t i = 0;
-    for (; i + 1 < list.size(); i += 2) {
-        if (list[i] > list[i + 1]) {
-            sorted.push_back(list[i]);
-            pending.push_back(list[i + 1]);
-        } else {
-            sorted.push_back(list[i + 1]);
-            pending.push_back(list[i]);
-        }
+    // Étape 1 : Créer des paires triées
+    std::vector<std::pair<size_t, size_t> > pairs;
+    std::vector<size_t> remaining;
+    
+    for (size_t i = 0; i + 1 < list.size(); i += 2)
+	{
+        if (list[i] > list[i + 1]) std::swap(list[i], list[i + 1]);
+        pairs.push_back(std::make_pair(list[i], list[i + 1]));
     }
-    if (i < list.size()) // Si un élément reste seul
-        sorted.push_back(list[i]);
 
-    // Étape 2 : Tri initial de `sorted` avec Merge-Sort (on l'implémente à la main)
-    MergeSort(sorted, 0, sorted.size() - 1);
+    // Ajouter l'élément restant s'il y a un nombre impair d'éléments
+    if (list.size() % 2 == 1) remaining.push_back(list.back());
 
-    // Étape 3 : Générer la séquence d'insertion optimisée
-    std::vector<size_t> insertion_order = GenerateInsertionSequence(pending.size());
+    // Étape 2 : Trier les petits éléments des paires
+    std::vector<size_t> sortedList;
+    for (size_t i = 0; i < pairs.size(); i++)
+		sortedList.push_back(pairs[i].first);
 
-    // Étape 4 : Insertion des éléments de `pending` dans `sorted` dans l'ordre optimal
-    for (size_t i = 0; i < insertion_order.size(); i++) {
-    	size_t index = insertion_order[i];
-        if (index < pending.size()) {
-            size_t num = pending[index];
+	VectorInsertionSort(sortedList);
 
-            // Recherche binaire pour trouver la bonne position
-            size_t left = 0;
-            size_t right = sorted.size();
-            while (left < right) {
-                size_t mid = left + (right - left) / 2;
-                if (sorted[mid] < num)
-                    left = mid + 1;
-                else
-                    right = mid;
-            }
+    // Étape 3 : Insérer les grands éléments des paires avec Jacobsthal
+    std::vector<size_t> jacobsthal = VectorGenerateJacobsthalSequence(pairs.size());
 
-            // Insérer num dans sorted à la position trouvée
-            sorted.insert(sorted.begin() + left, num);
-        }
+    for (size_t i = 1; i < jacobsthal.size() && i - 1 < pairs.size(); i++)
+	{
+        size_t idx = jacobsthal[i] - 1; // La suite de Jacobsthal commence à 1 en général
+        if (idx >= pairs.size()) break;
+        VectorBinaryInsert(sortedList, pairs[idx].second);
     }
-    return (sorted);
+
+    // Étape 4 : Insérer l’élément restant
+    for (size_t i = 0; i < remaining.size(); i++)
+        VectorBinaryInsert(sortedList, remaining[i]);
+
+    return (sortedList);
+}
+
+/////////////////////////// Deque ///////////////////////////
+// Générer la suite de Jacobsthal jusqu'à une limite donnée
+std::deque<size_t> DequeGenerateJacobsthalSequence(int n)
+{
+    std::deque<size_t> jacobsthal;
+    jacobsthal.push_back(0);
+    jacobsthal.push_back(1);
+
+    while ((int)jacobsthal.size() < n)
+	{
+        int next = jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2];
+        jacobsthal.push_back(next);
+    }
+    return (jacobsthal);
+}
+// Tri par insertion
+void DequeInsertionSort(std::deque<size_t> &arr)
+{
+    for (size_t i = 1; i < arr.size(); i++)
+	{
+        size_t key = arr[i];
+        size_t j = i;
+        
+        // Décaler les éléments plus grands vers la droite
+        while (j > 0 && arr[j - 1] > key)
+		{
+            arr[j] = arr[j - 1];
+            j--;
+        }
+
+        // Insérer l'élément à la bonne place
+        arr[j] = key;
+    }
+}
+// Recherche binaire
+void DequeBinaryInsert(std::deque<size_t> &sortedList, int element)
+{
+    std::deque<size_t>::iterator it = std::lower_bound(sortedList.begin(), sortedList.end(), element);
+    sortedList.insert(it, element);
 }
 std::deque<size_t> PmergeMe::DequeSort(std::deque<size_t> list)
 {
 	if (DequeIsSorted(list) == true)
 		return (list);
-	return (list);
+
+    // Étape 1 : Créer des paires triées
+    std::deque<std::pair<size_t, size_t> > pairs;
+    std::deque<size_t> remaining;
+    
+    for (size_t i = 0; i + 1 < list.size(); i += 2)
+	{
+        if (list[i] > list[i + 1]) std::swap(list[i], list[i + 1]);
+        pairs.push_back(std::make_pair(list[i], list[i + 1]));
+    }
+
+    // Ajouter l'élément restant s'il y a un nombre impair d'éléments
+    if (list.size() % 2 == 1) remaining.push_back(list.back());
+
+    // Étape 2 : Trier les petits éléments des paires
+    std::deque<size_t> sortedList;
+    for (size_t i = 0; i < pairs.size(); i++)
+		sortedList.push_back(pairs[i].first);
+
+	DequeInsertionSort(sortedList);
+
+    // Étape 3 : Insérer les grands éléments des paires avec Jacobsthal
+    std::deque<size_t> jacobsthal = DequeGenerateJacobsthalSequence(pairs.size());
+
+    for (size_t i = 1; i < jacobsthal.size() && i - 1 < pairs.size(); i++)
+	{
+        size_t idx = jacobsthal[i] - 1; // La suite de Jacobsthal commence à 1 en général
+        if (idx >= pairs.size()) break;
+        DequeBinaryInsert(sortedList, pairs[idx].second);
+    }
+
+    // Étape 4 : Insérer l’élément restant
+    for (size_t i = 0; i < remaining.size(); i++)
+        DequeBinaryInsert(sortedList, remaining[i]);
+
+    return (sortedList);
 }
 
 bool PmergeMe::VectorIsSorted(std::vector<size_t> &list)

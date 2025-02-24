@@ -24,10 +24,12 @@ int main(int argc, char**argv)
         std::deque<size_t> deque_sorted = PmergeMe::DequeTime(deque, time_deque);
 
         // Print the result
-        std::cout << Cyan << "Before : " << Yellow; PmergeMe::PrintVector(vector); std::cout << Reset_Color << std::endl;
-        std::cout << Cyan << "After : " << Yellow; PmergeMe::PrintVector(vector_sorted); std::cout << Reset_Color << std::endl;
-        std::cout << Cyan << "Time to process a range of " << vector.size() << " elements with std::vector : " << Yellow << time_vector << Cyan << " us" << Reset_Color << std::endl;
-        std::cout << Cyan << "Time to process a range of " << deque.size() << " elements with std::deque : " << Yellow << time_deque << Cyan << " us" << Reset_Color << std::endl;
+        std::cout << Cyan << "Before : " << Red; PmergeMe::PrintVector(vector); std::cout << Reset_Color << std::endl;
+        std::cout << std::endl;
+        std::cout << Cyan << "After : " << Red; PmergeMe::PrintVector(vector_sorted); std::cout << Reset_Color << std::endl;
+        std::cout << std::endl;
+        std::cout << Cyan << "Time to process a range of " << Purple << vector.size() << Cyan << " elements with std::vector : " << Yellow << time_vector << Cyan << " us" << Reset_Color << std::endl;
+        std::cout << Cyan << "Time to process a range of " << Purple << deque.size() << Cyan << " elements with std::deque : " << Yellow << time_deque << Cyan << " us" << Reset_Color << std::endl;
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
