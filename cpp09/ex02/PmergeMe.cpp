@@ -29,7 +29,6 @@ std::vector<size_t> PmergeMe::ConvertVector(char **argv)
 	int i = 0;
 	while (argv[i])
 	{
-		// std::cout << std::atof(argv[i]) << std::endl;
 		if (std::atof(argv[i]) < 0)
 			throw NegativeArgsException();
 		std::stringstream ss(argv[i]);
@@ -65,7 +64,6 @@ const std::vector<size_t> PmergeMe::VectorTime(std::vector<size_t> list, double 
 {
 	std::clock_t start = std::clock();
 	list = VectorSort(list);
-	// std::sort(list.begin(), list.end());
 	std::clock_t end = std::clock();
 	time = ((end - start) * 1000000) / CLOCKS_PER_SEC;
 	return (list);
