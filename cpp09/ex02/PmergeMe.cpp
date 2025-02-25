@@ -29,6 +29,9 @@ std::vector<size_t> PmergeMe::ConvertVector(char **argv)
 	int i = 0;
 	while (argv[i])
 	{
+		// std::cout << std::atof(argv[i]) << std::endl;
+		if (std::atof(argv[i]) < 0)
+			throw NegativeArgsException();
 		std::stringstream ss(argv[i]);
 		size_t num;
 		ss >> num;
@@ -45,6 +48,8 @@ std::deque<size_t> PmergeMe::ConvertDeque(char **argv)
 	int i = 0;
 	while (argv[i])
 	{
+		if (std::atof(argv[i]) < 0)
+			throw NegativeArgsException();
 		std::stringstream ss(argv[i]);
 		size_t num;
 		ss >> num;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>  	// base
+#include <cstdlib>		// atof
 #include <fstream>		// file gestion
 #include <sstream>		// text gestion
 #include <vector> 		// vector
@@ -41,6 +42,12 @@ class PmergeMe
 			public:
 				virtual const char *what() const throw() {
 					return ("\033[0;31mInvalid argument\033[0m");
+				}
+		};
+		class NegativeArgsException : public std::exception {
+			public:
+				virtual const char *what() const throw() {
+					return ("\033[0;31mNegative number not accepted\033[0m");
 				}
 		};
 };
