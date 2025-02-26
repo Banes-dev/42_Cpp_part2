@@ -161,6 +161,7 @@ std::vector<size_t> PmergeMe::VectorSort(std::vector<size_t> list)
 		sortedList.push_back(pairs[i].first);
 
 	VectorInsertionSort(sortedList);
+	// PrintVector(sortedList); std::cout << std::endl;
 
     // Étape 3 : Insérer les grands éléments des paires avec Jacobsthal
     std::vector<size_t> jacobsthal = VectorGenerateJacobsthalSequence(pairs.size());
@@ -171,8 +172,15 @@ std::vector<size_t> PmergeMe::VectorSort(std::vector<size_t> list)
         if (idx >= pairs.size()) break;
         VectorBinaryInsert(sortedList, pairs[idx].second);
     }
+	// Vérifier que tous les grands éléments des paires ont été insérés
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		if (std::find(sortedList.begin(), sortedList.end(), pairs[i].second) == sortedList.end())
+			VectorBinaryInsert(sortedList, pairs[i].second);
+	}
 
     // Étape 4 : Insérer l’élément restant
+
     for (size_t i = 0; i < remaining.size(); i++)
         VectorBinaryInsert(sortedList, remaining[i]);
 
@@ -253,6 +261,12 @@ std::deque<size_t> PmergeMe::DequeSort(std::deque<size_t> list)
         if (idx >= pairs.size()) break;
         DequeBinaryInsert(sortedList, pairs[idx].second);
     }
+	// Vérifier que tous les grands éléments des paires ont été insérés
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		if (std::find(sortedList.begin(), sortedList.end(), pairs[i].second) == sortedList.end())
+			DequeBinaryInsert(sortedList, pairs[i].second);
+	}
 
     // Étape 4 : Insérer l’élément restant
     for (size_t i = 0; i < remaining.size(); i++)
